@@ -1,0 +1,27 @@
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         convertDeprecationsToExceptions="true"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         convertNoticesToExceptions="true"
+         colors="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Soyhuce Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <report>
+            <cobertura outputFile="./phpunit/cobertura.xml"/>
+            <text outputFile="./phpunit/coverage.txt"/>
+        </report>
+    </coverage>
+    <logging>
+        <junit outputFile="./phpunit/report.junit.xml"/>
+    </logging>
+</phpunit>
