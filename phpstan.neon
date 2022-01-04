@@ -6,10 +6,13 @@ parameters:
   paths:
     - src
 
-  # Level 8 is max
+
   level: 8
 
   ignoreErrors:
+
+  bootstrapFiles:
+    - vendor-bin/phpstan/bootstrap.php
 
   checkMissingIterableValueType: true
   checkGenericClassInNonGenericObjectType: false

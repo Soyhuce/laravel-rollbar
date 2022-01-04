@@ -33,7 +33,13 @@ class Rollbar
      */
     protected function loggerConfig(): array
     {
-        return collect($this->config->get('logging.channels.rollbar'))
+        $config = collect($this->config->get('logging.channels.rollbar'));
+
+        if (!$config->has('access_token')) {
+            $config->put('access_token', 'access_token is missing in conf.');
+        }
+
+        return $config
             ->except(['driver', 'handler', 'level'])
             ->merge([
                 'environment' => $this->app->environment(),
