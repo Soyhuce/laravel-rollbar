@@ -78,7 +78,30 @@ it('logs a message with current session', function (): void {
     Log::debug('The message');
 
     Rollbar::assertLogged(
-        fn (Data $message) => $message->getPerson()->getId() === $session->getId()
-            && $message->getPerson()->serialize()['session']['foo'] === 'bar'
+        fn (Data $message) => $message->getPerson()->serialize() === [
+            'id' => $session->getId(),
+            'session' => [
+                '_token' => $session->token(),
+                'foo' => 'bar',
+            ],
+        ]
+    );
+});
+
+it('logs a message with custom user resolver', function (): void {
+    Rollbar::resolveAuthenticatedUserUsing(fn () => [
+        'id' => 'the-user',
+        'foo' => 'bar',
+        'array' => [1, 2, 3],
+    ]);
+
+    Log::debug('The message');
+
+    Rollbar::assertLogged(
+        fn (Data $message) => $message->getPerson()->serialize() === [
+            'id' => 'the-user',
+            'foo' => 'bar',
+            'array' => [1, 2, 3],
+        ]
     );
 });

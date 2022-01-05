@@ -10,6 +10,9 @@ class LaravelRollbar
 {
     protected RollbarLogger $logger;
 
+    /** @var null|callable(): array<string, mixed> */
+    protected $authenticatedUserResolver = null;
+
     public function __construct(
         protected Application $app,
         protected Repository $config,
@@ -54,6 +57,14 @@ class LaravelRollbar
     }
 
     /**
+     * @param callable(): array<string, mixed> $resolver
+     */
+    public function resolveAuthenticatedUserUsing(callable $resolver): void
+    {
+        $this->authenticatedUserResolver = $resolver;
+    }
+
+    /**
      * @return array<string, mixed>
      */
     protected function resolvePersonContext(): array
@@ -66,11 +77,19 @@ class LaravelRollbar
             ];
         }
 
-        // TODO : make it configurable
-        if ($this->app->get('auth')->check()) {
-            $context['id'] = (string) $this->app->get('auth')->id();
-        }
+        return array_merge($context, $this->resolveAuthenticatedUser());
+    }
 
-        return $context;
+    /**
+     * @return array<string, mixed>
+     */
+    protected function resolveAuthenticatedUser(): array
+    {
+        $resolver = $this->authenticatedUserResolver
+            ?? fn () => $this->app->get('auth')->check()
+                ? ['id' => (string) $this->app->get('auth')->id()]
+                : [];
+
+        return $resolver();
     }
 }
