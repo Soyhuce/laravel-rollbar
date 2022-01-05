@@ -4,11 +4,17 @@ namespace Soyhuce\LaravelRollbar;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
+use Rollbar\Handlers\ErrorHandler;
+use Rollbar\Handlers\ExceptionHandler;
+use Rollbar\Handlers\FatalHandler;
 use Rollbar\RollbarLogger;
 
 class LaravelRollbar
 {
     protected RollbarLogger $logger;
+
+    /** @var array<\Rollbar\Handlers\AbstractHandler> */
+    protected array $handlers;
 
     /** @var null|callable(): array<string, mixed> */
     protected $authenticatedUserResolver = null;
@@ -18,7 +24,6 @@ class LaravelRollbar
         protected Repository $config,
     ) {
         $this->initialize();
-        // handle exceptions, errors and fatals
     }
 
     public function logger(): RollbarLogger
@@ -29,6 +34,14 @@ class LaravelRollbar
     protected function initialize(): void
     {
         $this->logger = new RollbarLogger($this->loggerConfig());
+        $this->handlers = [
+            new ExceptionHandler($this->logger),
+            new ErrorHandler($this->logger),
+            new FatalHandler($this->logger),
+        ];
+        foreach ($this->handlers as $handler) {
+            $handler->register();
+        }
     }
 
     /**
