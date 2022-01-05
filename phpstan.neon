@@ -11,8 +11,5 @@ parameters:
 
   ignoreErrors:
 
-  bootstrapFiles:
-    - vendor-bin/phpstan/bootstrap.php
-
   checkMissingIterableValueType: true
   checkGenericClassInNonGenericObjectType: false

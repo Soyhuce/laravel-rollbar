@@ -19,8 +19,6 @@ class TestCase extends Orchestra
 
     protected function getEnvironmentSetUp($app): void
     {
-        ini_set('zend.exception_ignore_args', '');
-
         $app->get('config')->set(
             'logging.channels.rollbar.access_token',
             'abcdefghijklmnopqrstuvwxyz012345'
