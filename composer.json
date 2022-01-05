@@ -4,7 +4,7 @@
   "keywords": [
     "soyhuce",
     "laravel",
-    "laravel-rollbar"
+    "rollbar"
   ],
   "license": "MIT",
   "authors": [
@@ -16,8 +16,8 @@
   ],
   "require": {
     "php": "^8.0",
-    "illuminate/contracts": "^8.46",
-    "illuminate/support": "^8.46",
+    "illuminate/contracts": "^8.74",
+    "illuminate/support": "^8.74",
     "rollbar/rollbar": "^3.0"
   },
   "require-dev": {
