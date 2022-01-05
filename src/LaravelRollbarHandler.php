@@ -3,13 +3,13 @@
 namespace Soyhuce\LaravelRollbar;
 
 use Monolog\Handler\RollbarHandler as MonologRollbarHandler;
-use Soyhuce\LaravelRollbar\Facades\Rollbar as RollbarFacade;
+use Soyhuce\LaravelRollbar\Facades\Rollbar;
 
-class RollbarHandler extends MonologRollbarHandler
+class LaravelRollbarHandler extends MonologRollbarHandler
 {
     protected function write(array $record): void
     {
-        RollbarFacade::addPersonContextToLogger();
+        Rollbar::addPersonContextToLogger();
         parent::write($record);
     }
 }

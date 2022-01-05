@@ -6,7 +6,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Rollbar\RollbarLogger;
 
-class Rollbar
+class LaravelRollbar
 {
     protected RollbarLogger $logger;
 

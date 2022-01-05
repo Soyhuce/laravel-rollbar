@@ -4,6 +4,7 @@ namespace Soyhuce\LaravelRollbar\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Soyhuce\LaravelRollbar\Fakes\FakeRollbar;
+use Soyhuce\LaravelRollbar\LaravelRollbar;
 
 /**
  * @method static \Rollbar\RollbarLogger logger()
@@ -16,7 +17,7 @@ class Rollbar extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Soyhuce\LaravelRollbar\Rollbar::class;
+        return LaravelRollbar::class;
     }
 
     public static function fake(): FakeRollbar

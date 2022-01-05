@@ -9,8 +9,8 @@ class LaravelRollbarServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(RollbarHandler::class, function ($app) {
-            return new RollbarHandler(
+        $this->app->bind(LaravelRollbarHandler::class, function ($app) {
+            return new LaravelRollbarHandler(
                 Rollbar::logger(),
                 $app->get('config')->get('logging.channels.rollbar.level', 'debug'),
             );

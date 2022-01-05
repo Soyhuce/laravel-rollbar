@@ -4,12 +4,12 @@ namespace Soyhuce\LaravelRollbar\Fakes;
 
 use PHPUnit\Framework\Assert;
 use Rollbar\Payload\Data;
-use Soyhuce\LaravelRollbar\Rollbar;
+use Soyhuce\LaravelRollbar\LaravelRollbar;
 
 /**
  * @property \Soyhuce\LaravelRollbar\Fakes\FakeRollbarLogger $logger
  */
-class FakeRollbar extends Rollbar
+class FakeRollbar extends LaravelRollbar
 {
     protected function initialize(): void
     {

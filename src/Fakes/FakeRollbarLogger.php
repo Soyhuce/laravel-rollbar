@@ -5,7 +5,6 @@ namespace Soyhuce\LaravelRollbar\Fakes;
 use Illuminate\Support\Collection;
 use Rollbar\Response;
 use Rollbar\RollbarLogger;
-use Throwable;
 
 class FakeRollbarLogger extends RollbarLogger
 {
@@ -14,7 +13,7 @@ class FakeRollbarLogger extends RollbarLogger
 
     /**
      * @param string $level
-     * @param string|Throwable $toLog
+     * @param string|\Throwable $toLog
      * @param array<string, mixed> $context
      */
     public function log($level, $toLog, array $context = []): Response
