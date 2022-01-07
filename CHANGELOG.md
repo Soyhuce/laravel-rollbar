@@ -11,6 +11,8 @@ up [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Support for Laravel 9
+
 ### Changed
 
 ### Deprecated
